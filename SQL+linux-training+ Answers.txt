@@ -180,7 +180,7 @@ user1@your-local-PC:/home/user1# stat -c %a /home/user1/test1 1777
   b) Create a directory test2 in the user1 home directory. The permissions should be set so user2 can create modify files in it but all of the files in the directory that are created by user2 should be created under the user1 group
 Points: 4
 
-ANSWER : 
+ANSWER : Execute from user1
 user1@your-local-PC:/home/user1# mkdir -p /home/user1/test2
 user1@your-local-PC:/home/user1# stat -c %a /home/user1/test2 775
 user1@your-local-PC:/home/user1# chmod o+w /home/user1/test2
