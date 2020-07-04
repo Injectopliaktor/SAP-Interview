@@ -164,9 +164,29 @@ ANSWER : ip addr | egrep -o "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
 Points 3
 
 Create user1 and user2 on a Linux machine. They should not be added in any root level access groups.
-  a) Create a directory test1 in the user1 home directory also create a file/s in it. The permissions should be set so user2 can modify the user1 file/s, create new ones but is unable files owned by user1.
+  a) Create a directory test1 in the user1 home directory also create a file/s in it. The permissions should be set so user2 can modify the user1 file/s, create new ones but is unable to delete files owned by user1.
+  
+  ANSWER : 
+  All should be done from user 1
+user1@your-local-PC:/home/user1# mkdir -p /home/user1/test1
+user1@your-local-PC:/home/user1# stat -c %a /home/user1/test1 775
+user1@your-local-PC:/home/user1# touch /home/user1/test1/file1.txt /home/user1/test1/file2.txt /home/user1/test1/file3.txt
+user1@your-local-PC:/home/user1# chmod o+w /home/user1/test1
+user1@your-local-PC:/home/user1# stat -c %a /home/user1/test1 777
+user1@your-local-PC:/home/user1# chmod +t /home/user1/test1
+user1@your-local-PC:/home/user1# stat -c %a /home/user1/test1 1777
+  
+  
   b) Create a directory test2 in the user1 home directory. The permissions should be set so user2 can create modify files in it but all of the files in the directory that are created by user2 should be created under the user1 group
 Points: 4
+
+ANSWER : 
+user1@your-local-PC:/home/user1# mkdir -p /home/user1/test2
+user1@your-local-PC:/home/user1# stat -c %a /home/user1/test2 775
+user1@your-local-PC:/home/user1# chmod o+w /home/user1/test2
+user1@your-local-PC:/home/user1# stat -c %a /home/user1/test 2777
+user1@your-local-PC:/home/user1# chmod g+s /home/user1/test2
+user1@your-local-PC:/home/user1# stat -c %a /home/user1/test2 2777
 
 Create a public git repository with a provider of your choice and upload all the answers using the command line only.
 
